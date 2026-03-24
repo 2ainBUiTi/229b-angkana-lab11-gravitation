@@ -9,6 +9,9 @@ public class Gravity : MonoBehaviour
 
     public static List<Gravity> otherObjectsList;
 
+    [SerializeField] bool planet = false;
+    [SerializeField] int orbitspeed = 1000;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -21,6 +24,11 @@ public class Gravity : MonoBehaviour
 
         //add object (with gravity script) to attract to the list
         otherObjectsList.Add(this);
+
+        //orbit
+        if (!planet) {
+            rb.AddForce(Vector3.left * orbitspeed);
+        }
     }
 
     private void FixedUpdate()
